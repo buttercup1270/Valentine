@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Soft, cute, and handwritten fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600;800&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --soft-pink: #fff0f3;
+            --softer-pink: #ffdae1;
+            --soft-lavender: #f8f0ff;
+            --kawaii-pink: #ffb3c1;
+            --accent-pink: #ff85a1;
+            --deep-heart: #ff4d6d;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 15px 45px rgba(255, 179, 193, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--soft-lavender) 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Animation Background */
+        .background-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            opacity: 0.6;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(110vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Main Card */
+        .container {
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            animation: floatCard 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        @keyframes floatCard {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(1deg);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 2.5rem;
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+            border: 3px solid white;
+            max-width: 480px;
+            width: 90vw;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: entry 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes entry {
+            from {
+                transform: scale(0.5) translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--accent-pink);
+            font-size: 2.2rem;
+            margin: 1rem 0;
+            line-height: 1.4;
+            text-shadow: 2px 2px 0px white;
+        }
+
+        .kawaii-characters {
+            width: 180px;
+            height: auto;
+            margin: 10px 0;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.05));
+            animation: sway 3s ease-in-out infinite;
+            mix-blend-mode: multiply;
+            /* Blends white background of the image with the card */
+        }
+
+        @keyframes sway {
+
+            0%,
+            100% {
+                transform: rotate(-3deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(3deg) scale(1.05);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 100px;
+            width: 100%;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Nunito', sans-serif;
+            position: relative;
+            z-index: 50;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, var(--kawaii-pink), var(--accent-pink));
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(255, 133, 161, 0.4);
+        }
+
+        .btn-no {
+            background: #f0f0f0;
+            color: #888;
+        }
+
+        /* Success Screen */
+        #celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 243, 0.98);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .celebration-text {
+            font-family: 'Pacifico', cursive;
+            color: var(--deep-heart);
+            font-size: 3rem;
+            margin: 20px 0;
+            animation: pop 0.8s infinite alternate;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.9);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        #sparkle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .decoration {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .confetti-heart {
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Background -->
+    <div class="background-hearts" id="bg-hearts"></div>
+
+    <div class="container">
+        <div class="card" id="main-card">
+            <div class="decoration">🎀 ✨ 🎀</div>
+            <h1>Will you be my Valentine? 💖</h1>
+
+            <!-- Dancing Kawaii Characters (Tonton Friends) -->
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWVxcTM1YWt0YnRiemEwcmZqczF2NDJpcnlnZ3VkNGh6YThnY2I5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TEXEYI8XFZGTISSwhr/giphy.gif"
+                alt="Dancing Bunny and Bear" class="kawaii-characters">
+
+            <div class="buttons" id="btn-container">
+                <button class="btn btn-yes" id="yesBtn">YES 💕</button>
+                <button class="btn btn-no" id="noBtn">NO 😢</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Screen -->
+    <div id="celebration">
+        <canvas id="sparkle-canvas"></canvas>
+        <img src="https://media.giphy.com/media/kG7Yed5fZzPKf7fM0x/giphy.gif" alt="Dancing Characters"
+            style="width: 250px; margin-bottom: 20px;">
+        <h2 class="celebration-text">Yay! You’re my Valentine 💘</h2>
+        <p style="font-size: 1.4rem; color: #ff85a1; font-family: 'Pacifico', cursive;">I love you so, so much! ✨🥰</p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const celebration = document.getElementById('celebration');
+        const card = document.getElementById('main-card');
+        const bgHearts = document.getElementById('bg-hearts');
+
+        // 1. DENSE FLOATING BACKGROUND HEARTS
+        const heartEmojis = ['💖', '💗', '💓', '💝', '💕', '✨', '🌸'];
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            heart.style.filter = `hue-rotate(${Math.random() * 20}deg)`;
+            bgHearts.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        setInterval(createHeart, 200); // More frequent hearts
+
+        // 2. "NO" BUTTON EVASION LOGIC (Constrained to Card)
+        function moveButton() {
+            // Parenting check to ensure stability
+            if (noBtn.parentElement !== card) {
+                card.appendChild(noBtn);
+            }
+
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const padding = 20;
+
+            const maxX = card.clientWidth - btnWidth - padding;
+            const maxY = card.clientHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.random() * maxX);
+            const randomY = Math.max(padding, Math.random() * maxY);
+
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.margin = '0';
+            noBtn.style.zIndex = '100';
+
+            // Add a little shake effect when it moves
+            noBtn.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+        }
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveButton();
+        });
+
+        // 3. SUCCESS CELEBRATION
+        yesBtn.addEventListener('click', () => {
+            celebration.style.display = 'flex';
+            startSparkles();
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate([100, 50, 100]);
+            }
+        });
+
+        // 4. HEART SPARKLE CANVAS
+        const canvas = document.getElementById('sparkle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function startSparkles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            for (let i = 0; i < 200; i++) {
+                particles.push(new Particle());
+            }
+            animateParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height * 0.4;
+                this.size = Math.random() * 15 + 5;
+                this.speedX = (Math.random() - 0.5) * 12;
+                this.speedY = (Math.random() - 0.6) * 15;
+                this.color = `hsl(${Math.random() * 40 + 330}, 100%, 75%)`;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 10 - 5;
+                this.opacity = 1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.25;
+                this.rotation += this.rotationSpeed;
+                this.opacity -= 0.005;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                // Draw heart shape
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size, this.size / 4, 0, this.size);
+                ctx.bezierCurveTo(this.size, this.size / 4, this.size / 2, -this.size / 2, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].opacity <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            if (particles.length > 0) {
+                requestAnimationFrame(animateParticles);
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>
